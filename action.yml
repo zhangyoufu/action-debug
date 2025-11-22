@@ -17,6 +17,8 @@ runs:
       run: brew install cloudflared ttyd
 
     - name: Run in background
+      shell: bash
+      run: |-
         ttyd -c ${{ inputs.credentials }} -p 8391 -a -W bash &
         cloudflared tunnel --url http://127.0.0.1:8391 > ../action-debug.log 2>&1 &
 
